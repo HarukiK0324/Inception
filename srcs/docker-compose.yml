@@ -1,32 +1,65 @@
 version: '3.8'
 
 services:
-
+  mariadb:
+    build: 
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
+      container_name: mariadb
+      restart: always
+    env_file:
+      - .env
+    networks:
+      - inception_network
+    volumes:
+      - mariadb_data:/var/lib/mysql
   wordpress:
-    image: wordpress
+    build: 
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+    container_name: wordpress
     restart: always
-    ports:
-      - 8080:80
-    environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: exampleuser
-      WORDPRESS_DB_PASSWORD: examplepass
-      WORDPRESS_DB_NAME: exampledb
+    env_file:
+      - .env
+    networks:
+      - inception_network
     volumes:
-      - wordpress:/var/www/html
+      - wordpress_data:/var/www/html
+    depends_on:
+      - mariadb
 
-  db:
-    image: mysql:8.0
+  nginx:
+    build: 
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+    container_name: nginx
     restart: always
-    environment:
-      MYSQL_DATABASE: exampledb
-      MYSQL_USER: exampleuser
-      MYSQL_PASSWORD: examplepass
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    env_file:
+      - .env [cite: 117]
+    ports:
+      - "443:443"
+    networks:
+      - inception_network
     volumes:
-      - db:/var/lib/mysql
+      - wordpress_data:/var/www/html 
+    depends_on:
+      - wordpress
+
+networks:
+  inception_network:
+  driver: bridge
 
 volumes:
-  wordpress:
-  db:
- 
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/hkasamat/data/mariadb
+
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/hkasamat/data/wordpress

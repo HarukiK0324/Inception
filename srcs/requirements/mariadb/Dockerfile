@@ -7,7 +7,7 @@ RUN apt-get update && \
 
 # 2. Configure MariaDB to listen on all interfaces (not just localhost)
 # We use sed to modify the bind-address in the config file
-RUN sed -i 's/bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY ./conf/mariadb-server.conf /etc/mysql/mariadb.conf.d/mariadb-server.conf
 
 # 3. Create the socket directory and ensure permissions
 RUN mkdir -p /var/run/mysqld && \
@@ -18,7 +18,7 @@ RUN mkdir -p /var/run/mysqld && \
 EXPOSE 3306
 
 # 5. Copy our custom startup script
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY ./tools/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # 6. Start via the script
