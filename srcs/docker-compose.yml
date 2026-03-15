@@ -5,8 +5,8 @@ services:
     build: 
       context: ./requirements/mariadb
       dockerfile: Dockerfile
-      container_name: mariadb
-      restart: always
+    container_name: mariadb
+    restart: always
     env_file:
       - .env
     networks:
@@ -35,7 +35,7 @@ services:
     container_name: nginx
     restart: always
     env_file:
-      - .env [cite: 117]
+      - .env
     ports:
       - "443:443"
     networks:
@@ -47,7 +47,7 @@ services:
 
 networks:
   inception_network:
-  driver: bridge
+    driver: bridge
 
 volumes:
   mariadb_data:
