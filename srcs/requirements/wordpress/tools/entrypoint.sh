@@ -4,6 +4,7 @@ cd /var/www/html
 
 while ! mariadb -h mariadb -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "SELECT 1;" >/dev/null 2>&1; do
     sleep 3
+done
 
 if [ ! -f wp-config.php ]; then
     echo "Downloading and configuring WordPress..."

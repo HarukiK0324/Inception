@@ -12,7 +12,7 @@ up:
 down:
 	@docker compose -f $(COMPOSE_FILE) down
 
-clean:Z
+clean:
 	@docker compose -f $(COMPOSE_FILE) down -v
 
 fclean: clean
