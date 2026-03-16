@@ -2,9 +2,11 @@
 
 cd /var/www/html
 
+echo "Waiting for MariaDB to start..."
 while ! mariadb -h mariadb -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "SELECT 1;" >/dev/null 2>&1; do
     sleep 3
 done
+echo "MariaDB is up and running!"
 
 if [ ! -f wp-config.php ]; then
     echo "Downloading and configuring WordPress..."
@@ -30,6 +32,9 @@ if [ ! -f wp-config.php ]; then
                    --allow-root
     
     chown -R www-data:www-data /var/www/html
+    echo "WordPress installation complete!"
+else
+    echo "WordPress is already installed and configured."
 fi
 
 echo "Starting PHP-FPM..."
