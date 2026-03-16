@@ -9,6 +9,8 @@ done
 if [ ! -f wp-config.php ]; then
     echo "Downloading and configuring WordPress..."
     
+    rm -rf /var/www/html/*
+
     wp core download --allow-root
 
     wp config create --dbname="$MYSQL_DATABASE" \
