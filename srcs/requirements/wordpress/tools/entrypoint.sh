@@ -38,4 +38,5 @@ else
 fi
 
 echo "Starting PHP-FPM..."
+mkdir -p /run/php
 exec php-fpm8.2 -F
