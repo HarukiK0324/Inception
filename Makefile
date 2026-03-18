@@ -16,8 +16,8 @@ clean:
 	@docker compose -f $(COMPOSE_FILE) down -v
 
 fclean: clean
-	@sudo rm -rf $(DATA_DIR)/mariadb/*
-	@sudo rm -rf $(DATA_DIR)/wordpress/*
+	@sudo rm -rf $(DATA_DIR)/mariadb
+	@sudo rm -rf $(DATA_DIR)/wordpress
 	@docker system prune -af
 
 re: fclean all
