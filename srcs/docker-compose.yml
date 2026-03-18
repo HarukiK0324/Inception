@@ -13,6 +13,10 @@ services:
       - inception_network
     volumes:
       - mariadb_data:/var/lib/mysql
+    secrets:
+      - db_password
+      - db_root_password
+
   wordpress:
     build: 
       context: ./requirements/wordpress
@@ -27,6 +31,10 @@ services:
       - wordpress_data:/var/www/html
     depends_on:
       - mariadb
+    secrets:
+      - db_password
+      - wp_admin_password
+      - wp_user_password
 
   nginx:
     build: 
@@ -63,3 +71,13 @@ volumes:
       type: none
       o: bind
       device: /home/hkasamat/data/wordpress
+
+secrets:
+  db_password:
+    file: ../secrets/db_password.txt
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+  wp_admin_password:
+    file: ../secrets/wp_admin_password.txt
+  wp_user_password:
+    file: ../secrets/wp_user_password.txt

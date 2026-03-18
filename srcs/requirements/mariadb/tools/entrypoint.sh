@@ -6,9 +6,9 @@ if [ ! -d "/var/lib/mysql/${MYSQL_DATABASE}" ]; then
 
     cat << EOF > /tmp/init.sql
 FLUSH PRIVILEGES;
-ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
+ALTER USER 'root'@'localhost' IDENTIFIED BY '../secrets/db_root_password.txt';
 CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
-CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '../secrets/db_password.txt';
 GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
 FLUSH PRIVILEGES;
 EOF
