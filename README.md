@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by hkasamat
+*This project has been created as part of the 42 curriculum by hkasamat.*
 
 ## Description
 This project aims to broaden knowledge of system administration by using Docker. The goal is to set up a small infrastructure composed of different services running in dedicated containers within a personal virtual machine. The stack includes a secure NGINX web server, a WordPress site with PHP-FPM, and a MariaDB database.

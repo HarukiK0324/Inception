@@ -2,15 +2,14 @@
 This document describes how a developer can manage, build, and interact with the Inception infrastructure.
 
 ## Set Up the Environment from Scratch
-Because public credentials are strictly forbidden, you must set up your local configuration and secrets manually before building the project. 
+Because public credentials are strictly forbidden, I set up local configuration and secrets manually before building the project. 
 
-1. **Clone the Repository:** Clone the Git repository into your workspace.
-2. **Local Secrets Stash:** Keep a secure folder outside of the repository (e.g., `~/safe_secrets/`) containing your `secrets/` directory and `srcs/.env` file.
-3. **Copy Configuration:** Before running the build, copy your secure files into the cloned repository:
+1. **Clone the Repository:** Clone the Git repository into the workspace.
+2. **Local Secrets Stash:** Keep a secure folder outside of the repository containing the `secrets/` directory.
+3. **Copy Configuration:** Before running the build, copy the secure files into the cloned repository:
    ```bash
-   cp -r ~/safe_secrets/secrets ./
-   cp ~/safe_secrets/.env ./srcs/
-4. **Host Resolution:** Ensure that 127.0.0.1 hkasamat.42.fr is added to your /etc/hosts file.
+   cp -r ~/secrets ./
+4. **Host Resolution:** Ensure that 127.0.0.1 hkasamat.42.fr is added to the /etc/hosts file.
 
 ## Build and Launch the Project
 The entire application is managed via the Makefile located at the root.
